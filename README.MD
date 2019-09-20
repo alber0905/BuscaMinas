@@ -127,7 +127,7 @@ socket.emit('test', 'letters')
 
 ## Otros comandos
 
-Elisenda también admite el comando ping para testear las comunicaciones:
+Elisenda también admite el comando test para testear las comunicaciones:
 
 ```javascript
 socket.emit('test', '1234234234');
