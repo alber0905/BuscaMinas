@@ -2,6 +2,7 @@ import io from 'socket.io';
 
 export interface Socket extends io.Socket {
   teamName?: string;
+  score: number;
 }
 export interface SocketEvent {
   (socket: Socket): void;

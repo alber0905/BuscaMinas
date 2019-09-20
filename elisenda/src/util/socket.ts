@@ -54,11 +54,13 @@ const initService: SocketEvent = (socket): void => {
 const setup = (httpServer: http.Server): void => {
   const server = io(httpServer, options);
   currentServer = server;
-  server.on('connection', (socket): void => {
+  server.on('connection', (socket: Socket): void => {
     out.verbose(
       colors.white.bold(`Connected ${colors.yellow.bold(socket.id)}`),
     );
-    socketList[socket.id] = socket;
+    const skt = socket;
+    skt.score = 0;
+    socketList[socket.id] = skt;
     socket.on('disconnect', (): void => onDisconnect(socket));    
     methodWrapper<string>(socket, 'check', onPing);
     methodWrapper<void>(socket, 'test', onTest);

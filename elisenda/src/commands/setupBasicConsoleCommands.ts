@@ -4,6 +4,7 @@ import out from '../util/out';
 import { addCommand, getCommands } from './consoleCommands';
 import ciphers from '../game/ciphers';
 import letters from '../game/letters';
+import socketList, {Socket} from '../util/connections';
 
 /**
  * Element that can be closed
@@ -88,6 +89,34 @@ const setupBasicConsoleCommands = (
       'Run a Letters Quest',
     onExecute: async (): Promise<void> => {
       letters();
+    },
+  });
+
+  addCommand({
+    name: 'restart',
+    description:
+      'Restarting Scores',
+    onExecute: async (write): Promise<void> => {
+      Object.values(socketList).forEach((socket: Socket): void => {
+        const skt = socket;
+        skt.score = 0;
+      });
+      write('Scores restarted\n');
+      Object.values(socketList).forEach((socket: Socket): void => {
+        write(`${colors.green.bold(socket.score.toString())}\t${colors.green.bold(socket.teamName || 'Unnamed')}`);
+      });
+    },
+  });
+
+  addCommand({
+    name: 'ranking',
+    description:
+      'Restarting Scores',
+    onExecute: async (write): Promise<void> => {
+      write('Ranking\n');      
+      Object.values(socketList).sort((a: Socket, b: Socket): number => (a.score - b.score)).forEach((socket: Socket): void => {
+        write(`${colors.green.bold(socket.score.toString())}\t${colors.green.bold(socket.teamName || 'Unnamed')}`);
+      });
     },
   });
 };
