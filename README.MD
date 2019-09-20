@@ -130,10 +130,10 @@ socket.emit('test', 'letters')
 Elisenda también admite el comando test para testear las comunicaciones:
 
 ```javascript
-socket.emit('test', '1234234234');
+socket.emit('check', '1234234234');
 ```
 
-Que retornará un mensaje '1234234234' con valor {ok: true, d: null}.
+Que retornará un mensaje '1234234234' con valor {ok: true, d: 'pong'}.
 
 Y un comando de login para establecer el nombre del equipo.
 

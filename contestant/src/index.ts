@@ -15,9 +15,10 @@ export interface SocketMessage<ReturnType> {
   d: ReturnType;
 }
 
-function execute<ReturnType>(...args: [string | object | number | boolean]): Promise<ReturnType> {
-  // eslint-disable-next-line prefer-rest-params
-  const [name, ...params] = args;
+function execute<ReturnType>(
+  name: string, param?: string
+): Promise<ReturnType> {
+  // eslint-disable-next-line prefer-rest-params  
   return new Promise<ReturnType>((resolve, reject): void => {
     const id = Math.round(Math.random() * 1000000).toString();
     if (socket) {
@@ -32,8 +33,8 @@ function execute<ReturnType>(...args: [string | object | number | boolean]): Pro
         }
       });
     }
-    if (params) {
-      socket.emit(name as string, id, ...params);
+    if (param) {
+      socket.emit(name as string, id, param);
     } else {
       socket.emit(name as string, id);
     }
@@ -46,9 +47,10 @@ async function connect(): Promise<void> {
     async (): Promise<void> => {
       out.info('Connected...');
       try {
-        const result = await execute<string>('test');
+        const result = await execute<string>('check');
         if (result === 'pong') {
           await execute<void>('login', 'Unicorns Of Love');
+          await execute<void>('test', 'ciphers');
         }
       } catch (ex) {
         out.error(ex.message);

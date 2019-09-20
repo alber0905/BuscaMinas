@@ -8,6 +8,7 @@ import socketList, {Socket, SocketEvent} from './connections';
 import { APIFunctionInterface } from './APIFunctionInterface';
 import onPing from './socketCommands/onPing';
 import onLogin from './socketCommands/onLogin';
+import onTest from './socketCommands/onTest';
 
 const options = { path: setting.socketPath };
 let currentServer: io.Server | undefined;
@@ -59,7 +60,8 @@ const setup = (httpServer: http.Server): void => {
     );
     socketList[socket.id] = socket;
     socket.on('disconnect', (): void => onDisconnect(socket));    
-    methodWrapper<string>(socket, 'test', onPing);
+    methodWrapper<string>(socket, 'check', onPing);
+    methodWrapper<void>(socket, 'test', onTest);
     methodWrapper<void>(socket, 'login', onLogin);
     initService(socket);
   });
