@@ -8,9 +8,9 @@
   "scripts": {
     "build": "tsc",
     "test": "jest",
-    "test-dev": "NODE_ENV=development npx jest --watch",
-    "generateData": "NODE_ENV=development ts-node-dev ./src/generateData.ts",
+    "test-dev": "NODE_ENV=development npx jest --watch",    
     "dev": "NODE_ENV=development ts-node-dev --debug --respawn --transpileOnly ./src/index.ts",
+    "update-words-list": "curl https://raw.githubusercontent.com/javierarce/palabras/master/listado-general.txt --output ./data/spanishWords.txt",
     "start": "node ./dist/index.js",
     "lint": "npx eslint --config ./.eslintrc src/**/*.ts"
   },
