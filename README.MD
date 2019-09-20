@@ -124,3 +124,23 @@ socket.emit('test', 'ciphers')
 ```javascript
 socket.emit('test', 'letters')
 ```
+
+## Otros comandos
+
+Elisenda también admite el comando ping para testear las comunicaciones:
+
+```javascript
+socket.emit('test', '1234234234');
+```
+
+Que retornará un mensaje '1234234234' con valor {ok: true, d: null}.
+
+Y un comando de login para establecer el nombre del equipo.
+
+```javascript
+socket.emit('login', '345345454354', 'Unicorns Of Love');
+```
+
+Que retornará un mensaje '1234234234' con valor ```{ok: true, d: null}```.
+
+> **Nota**: En caso de que cualquier comando retorne un error lo hará devolviendo un objeto con la estructura ```{ok: false, e: err.message, stack: err.stack }```
