@@ -1,10 +1,6 @@
 const Combinatorics = require('js-combinatorics');
 
-const num = '342';
-
-export function numberCombination(num: string): number[] {
-  const arrNumbers = num.split('').map(str => Number(str));
-  const baseN = Combinatorics.baseN(arrNumbers, 3);
-
+function numberCombination(numberArray: number[]): number[] {
+  const baseN = Combinatorics.baseN(numberArray, 6).toArray()[0] as number[];
   return baseN;
 }

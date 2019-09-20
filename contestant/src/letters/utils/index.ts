@@ -1,17 +1,6 @@
-import Rae from 'rae';
 import Combinatorics from 'js-combinatorics';
-
-const raeClient = Rae.create();
-
-interface Item {
-  match: string;
-  id: string;
-}
-
-interface Match {
-  items: Item[];
-  multipleMatches: boolean;
-}
+import allWords from /* 'https://raw.githubusercontent.com/words/an-array-of-spanish-words/master/palabras.json'; // */ './allWords';
+import out from '../../util/out';
 
 export function getBestWord(arr: string[]): string {
   if (arr.length <= 9) {
@@ -31,7 +20,7 @@ export function combine(letters: string[]): string[] {
     const combArr = Combinatorics.combination(letters, size);
     if (combArr) {
       const arr: string[] = [];
-      combArr.forEach(letters => arr.push(letters.join()));
+      combArr.forEach((letters: string[]) => arr.push(letters.join()));
       return arr;
     }
   }
@@ -60,12 +49,7 @@ export function checkRae(arr: string[]): string[] {
 }
 
 export function askRae(word: string): boolean {
-  raeClient.search(word).then((match: Match): boolean => {
-    const { items, multipleMatches } = match;
-
-    return items.length > 0;
-  });
-  return false;
+  return !!allWords.find(word);
 }
 
 export function getLongestWord(arr: string[]): string {
