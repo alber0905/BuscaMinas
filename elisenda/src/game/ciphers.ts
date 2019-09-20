@@ -13,9 +13,8 @@ const runCiphers = async (socket?: Socket): Promise<void> => {
   }
 
   const numbers = allowedValues.sort((): number => Math.random() > 0.5 ? 1 : -1);
-  const ciphers = numbers.slice(0,5);
+  const ciphers = numbers.slice(0,6);
   const transaction = Math.round(Math.random() * 1000000).toString();
-
   const message = {
     transaction,
     ciphers,
@@ -23,7 +22,7 @@ const runCiphers = async (socket?: Socket): Promise<void> => {
   };
 
   out.info(`Sending ciphers: ${JSON.stringify(message)}`);
-  
+
   sockets.forEach((skt): void => {
     skt.emit('ciphers', message)
   });

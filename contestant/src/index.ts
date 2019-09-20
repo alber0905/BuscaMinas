@@ -41,16 +41,33 @@ function execute<ReturnType>(
   });
 }
 
+interface CiphersResponse {
+  transaction: string;
+  ciphers: number[];
+  expectedResult: number;
+}
+
+interface LetterResponse {
+  transaction: string;
+  letters: string[];
+}
 async function connect(): Promise<void> {
   socket.on(
     'connect',
-    async (): Promise<void> => {
+    async (): Promise<void> => {      
       out.info('Connected...');
+      socket.on('letters', async (info: LetterResponse): Promise<void> => {
+        out.info(`letters:\n${JSON.stringify(info,null,2)}`);
+      });
+      socket.on('ciphers', async (info: CiphersResponse): Promise<void> => {
+        out.info(`ciphers:\n${JSON.stringify(info,null,2)}`);
+      });
       try {
         const result = await execute<string>('check');
         if (result === 'pong') {
           await execute<void>('login', 'Unicorns Of Love');
           await execute<void>('test', 'ciphers');
+          await execute<void>('test', 'letters');
         }
       } catch (ex) {
         out.error(ex.message);
