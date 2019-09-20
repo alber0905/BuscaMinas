@@ -5,6 +5,7 @@ import out from '../util/out';
 const vowels = ['a','e','i','o','u'];
 const consonants = ['b','c','d','f','g','h', 'j', 'k', 'l', 'm', 'n', 'p', 'q', 'r', 's', 't', 'v', 'w', 'x', 'y', 'z'];
 
+ 
 const runLetters = async (socket?: Socket): Promise<void> => {
   let sockets: Socket[] = [];
 
@@ -30,7 +31,7 @@ const runLetters = async (socket?: Socket): Promise<void> => {
   let ended = false;
   let winner = '';
 
-  const testEnded = (): void => {
+  const testEnded = async (): Promise<void> => {
     if (!ended) {
       ended = true;
       Object.keys(results).forEach((key: string): void => {
@@ -39,7 +40,6 @@ const runLetters = async (socket?: Socket): Promise<void> => {
           let value = 0;
           values[key] = results[key].trim().length;
           value = results[key].trim().length;
-          
           if (value > bestResult) {
             bestResult = value;
             bestResponseTime = responseTimes[key];
@@ -67,10 +67,11 @@ const runLetters = async (socket?: Socket): Promise<void> => {
   out.info(`Sending letters: ${JSON.stringify(message)}`);
 
   sockets.forEach((skt): void => {
-    skt.on(transaction, (result: string): void => {
+    skt.on(transaction, async (result: string): Promise<void> => {
       const trimedRes = result.trim();
+      const start = new Date();      
       results[skt.id] = trimedRes;
-      responseTimes[skt.id] = new Date();
+      responseTimes[skt.id] = start;
       out.info(
         `Obtained result from ${colors.blue(
           skt.teamName || 'Unnamed',
