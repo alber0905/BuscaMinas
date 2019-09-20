@@ -53,7 +53,7 @@ Si ninguno lo consigue, gana el que se aproxime más. En caso de empate, se adju
 
 ### Letras
 
-Los concursantes piden, alternativamente, vocal o consonante, hasta un total de nueve letras, con las que deben formar, en 30 segundos, la palabra más larga posible sin usar ninguna letra más de una vez. Son válidas las palabras recogidas en el Diccionario de la Real Academia Española.
+Los concursantes piden, alternativamente, vocal o consonante, hasta un total de nueve letras, con las que deben formar, en 1 segundo, la palabra más larga posible sin usar ninguna letra más de una vez. Son válidas las palabras recogidas en el Diccionario de la Real Academia Española.
 No son válidos los plurales, ni las formas personales del verbo.
 Sí son válidos los femeninos y las formas no personales (infinitivo, participio y gerundio) de los verbos. Gana el concursante que consigue la palabra más larga.
 En caso de empate, gana el programa que enviase su respuesta antes.
@@ -144,3 +144,7 @@ socket.emit('login', '345345454354', 'Unicorns Of Love');
 Que retornará un mensaje '1234234234' con valor ```{ok: true, d: null}```.
 
 > **Nota**: En caso de que cualquier comando retorne un error lo hará devolviendo un objeto con la estructura ```{ok: false, e: err.message, stack: err.stack }```
+
+## Conexión
+
+Elisenda estará corriendo en [http://192.168.1.19:9230/ws](http://192.168.1.19:9230/ws)
