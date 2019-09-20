@@ -2,6 +2,8 @@ import ReadLine from 'readline';
 import colors from 'colors';
 import out from '../util/out';
 import { addCommand, getCommands } from './consoleCommands';
+import ciphers from '../game/ciphers';
+import letters from '../game/letters';
 
 /**
  * Element that can be closed
@@ -68,6 +70,24 @@ const setupBasicConsoleCommands = (
           )} for the command list.\n`
         );
       }
+    },
+  });
+
+  addCommand({
+    name: 'ciphers',
+    description:
+      'Run a Ciphers Quest',
+    onExecute: async (): Promise<void> => {
+      ciphers();
+    },
+  });
+
+  addCommand({
+    name: 'letters',
+    description:
+      'Run a Letters Quest',
+    onExecute: async (): Promise<void> => {
+      letters();
     },
   });
 };
