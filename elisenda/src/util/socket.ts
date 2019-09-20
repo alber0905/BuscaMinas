@@ -59,7 +59,7 @@ const setup = (httpServer: http.Server): void => {
     );
     socketList[socket.id] = socket;
     socket.on('disconnect', (): void => onDisconnect(socket));    
-    methodWrapper<string>(socket, 'ping', onPing);
+    methodWrapper<string>(socket, 'test', onPing);
     methodWrapper<void>(socket, 'login', onLogin);
     initService(socket);
   });

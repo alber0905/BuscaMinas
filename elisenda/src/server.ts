@@ -26,7 +26,7 @@ const server = (dev: boolean, port: number): Promise<ServerResponse> => {
       );
     });    
     listener.on('close', (): void => {
-      out.info(colors.white.bold('Http server closed'));
+      out.info(colors.white.bold('http server closed'));
     });
     const close = (): void => {
       listener.close();
