@@ -37,7 +37,7 @@
     "express": "^4.17.1",
     "get-port": "^5.0.0",
     "rae": "^1.0.3",
-    "socket.io": "^2.2.0",
+    "socket.io": "^2.5.0",
     "typescript": "^3.5.3",
     "winston": "^3.2.1"
   },
