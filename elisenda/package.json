@@ -34,7 +34,7 @@
     "command-line-args": "^5.1.1",
     "command-line-usage": "^6.0.2",
     "cors": "^2.8.5",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "get-port": "^5.0.0",
     "rae": "^1.0.3",
     "socket.io": "^2.2.0",
